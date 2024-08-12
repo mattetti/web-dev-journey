@@ -13,8 +13,9 @@ Learn the basics of CSS and apply styles to the HTML profile page for Rory Gilmo
 ## Exercise
 
 ### Step 1: Create your CSS file
+0. Copy your index.html file from the `01-html-intro` folder to the `02-css-basics` folder.
 1. In the `02-css-basics` folder, create a new file called `styles.css`.
-2. Link this CSS file to your `index.html` by adding the following line inside the `<head>` tag:
+2. Link this CSS file to your `index.html` by adding the following line inside the `<head>` tag of you index file:
    ```html
    <link rel="stylesheet" href="styles.css">
    ```
@@ -36,6 +37,7 @@ h1 {
     text-align: center;
 }
 ```
+Learn more about color values in CSS: [MDN CSS Colors](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) This is a very important concept.
 
 ### Step 3: Style paragraphs and lists
 Add styles for paragraphs and lists:
@@ -133,7 +135,7 @@ Feel free to experiment with different colors, font sizes, or layouts. Try addin
 ### Step 9: Test your work
 Open the `css-basics-browser-test.html` file in your browser to run the tests and ensure you've completed all required tasks.
 
-## Challenge (Optional)
+## Challenge
 Create a simple two-column layout for Rory's profile:
 1. Put Rory's image and quick facts in a left column.
 2. Put the main content (paragraphs, lists) in a right column.
