@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Results for Rory Gilmore's Profile</title>
+    <style>
+        .test-item { margin-bottom: 10px; }
+        .pass { color: green; }
+        .fail { color: red; }
+        .error { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Test Results for Rory Gilmore's Profile</h1>
+    <div id="results"></div>
+    <div id="content" style="display:none;"></div>
+
+    <script>
+        function loadIndexHTML() {
+            return fetch('index.html')
+                .then(response => {
+                    if (response.status === 404) {
+                        throw new Error('index.html not found');
+                    }
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    document.getElementById('content').innerHTML = html;
+                });
+        }
+
+        function displayError(message) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = `<p class="error">Error: ${message}</p>`;
+            console.error('Error:', message);
+        }
+
+        function runTests() {
+            const tests = [
+                { name: "Has h1 tag with 'Rory Gilmore'", test: () => document.querySelector('#content h1')?.textContent.includes('Rory Gilmore') },
+                { name: "Has at least one paragraph", test: () => document.querySelectorAll('#content p').length > 0 },
+                { name: "Has unordered list", test: () => document.querySelector('#content ul') !== null },
+                { name: "Has at least 3 list items", test: () => document.querySelectorAll('#content li').length >= 3 },
+                { name: "Has an image", test: () => document.querySelector('#content img') !== null },
+                { name: "Has a link", test: () => document.querySelector('#content a') !== null },
+                { name: "Uses strong tag", test: () => document.querySelector('#content strong') !== null },
+                { name: "Uses em tag", test: () => document.querySelector('#content em') !== null },
+                { name: "Uses u tag", test: () => document.querySelector('#content u') !== null },
+                { name: "Has a table", test: () => document.querySelector('#content table') !== null },
+            ];
+
+            const resultsDiv = document.getElementById('results');
+            tests.forEach(({name, test}) => {
+                const result = test();
+                const elem = document.createElement('div');
+                elem.className = `test-item ${result ? 'pass' : 'fail'}`;
+                elem.textContent = `${result ? '✓' : '✗'} ${name}`;
+                resultsDiv.appendChild(elem);
+            });
+        }
+
+        // Load index.html and then run tests
+        loadIndexHTML()
+            .then(runTests)
+            .catch(error => {
+                console.error('Caught error:', error);
+                if (error.message === 'index.html not found') {
+                    displayError('Could not find index.html. Make sure it exists in the same directory as this test file.');
+                } else {
+                    displayError('An error occurred while loading index.html. Check the console for more details.');
+                }
+            });
+    </script>
+</body>
+</html>
