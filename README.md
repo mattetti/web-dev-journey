@@ -61,6 +61,8 @@ To participate in this course, you'll need:
    - Choose a local directory to store the project
    - Click "Open" when prompted to open the cloned repository
 
+If you don't see the "Git: Clone" option, you may need to install Git on your computer. You can download Git from the [official website](https://git-scm.com/).
+
 ## Working on Exercises
 
 1. In VS Code, navigate to the exercise folder (e.g., `01-html-intro`)
